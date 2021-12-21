@@ -10,6 +10,7 @@
 </head>
 <body>
 <h2>member/findAll.jsp</h2>
+<a href="/">첫화면</a>
 <table class ="table table-striped">
 <thead>
 	<tr class="table-light">
@@ -20,6 +21,7 @@
 		<th>이메일</th>
 		<th>핸드폰번호</th>
 		<th>가입날짜</th>
+		<th>비밀번호등록일</th>
 		<th></th>
 		<th></th>
 	</tr>
@@ -34,6 +36,7 @@
 		<td>${member.m_email}</td>
 		<td>${member.m_phone}</td>
 		<td>${member.m_joindate}</td>
+		<td>${member.m_pwdate}</td>
 		<td><a href="/member/update?m_number=${member.m_number}">수정</a></td>
 		<td><a href="/member/delete?m_number=${member.m_number}">삭제</a></td>
 	</tr>	
@@ -41,7 +44,37 @@
 </tbody>
 </table>
 ${memberList}
+${paging}
 
-
+<div>
+	<c:choose>
+		<c:when test="${paging.page<=1}">
+			[이전]&nbsp;
+		</c:when>
+		<c:otherwise>
+			<a href="/member/paging?page=${paging.page-1}">[이전]</a>&nbsp;
+		</c:otherwise>
+	</c:choose>
+	
+	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+	<c:choose>
+		<c:when test="${i eq paging.page}">
+			${i}
+		</c:when>
+		<c:otherwise>
+			<a href="/member/paging?page=${i}">${i}</a>
+		</c:otherwise>
+	</c:choose>
+	</c:forEach>
+	
+	<c:choose>
+		<c:when test="${paging.page >= paging.maxPage}">
+			[다음]&nbsp;
+		</c:when>
+		<c:otherwise>
+			<a href="/member/paging?page=${paging.page+1}">[다음]</a>&nbsp;
+		</c:otherwise>
+	</c:choose>
+</div>
 </body>
 </html>

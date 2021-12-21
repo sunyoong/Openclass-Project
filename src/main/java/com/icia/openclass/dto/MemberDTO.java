@@ -1,6 +1,7 @@
 package com.icia.openclass.dto;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -12,5 +13,7 @@ public class MemberDTO {
 	private String m_name;
 	private String m_email;
 	private String m_phone;
-	private Timestamp m_joindate;
+	private Date m_joindate;
+	private LocalDateTime m_pwdate;
+	
 }

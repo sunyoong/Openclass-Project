@@ -1,4 +1,4 @@
-package com.icia.openclass.controller;
+package com.icia.openclass.dto;
 
 import lombok.Data;
 

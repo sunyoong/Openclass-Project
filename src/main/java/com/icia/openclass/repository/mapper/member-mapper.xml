@@ -3,15 +3,49 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="member"> 
- <insert id="save" parameterType="memberDTO">
- 	insert into member_table(m_id, m_password, m_name, m_email, m_phone)
- 	values(#{m_id}, #{m_password}, #{m_name}, #{m_email}, #{m_phone})
+ <!-- 회원가입 -->
+ <insert id="save">
+ 	insert into member_table(m_id, m_password, m_name, m_email, m_phone, m_joindate)
+ 	values(#{m_id}, #{m_password}, #{m_name}, #{m_email}, #{m_phone}, now())
  </insert>
- 
+ <!-- 회원 전체목록 조회  -->
  <select id="findAll" resultType="memberDTO">
  	select * from member_table;
  </select>
+ <!-- 아이디 중복확인 -->
+ <select id="idCheck" parameterType="String" resultType="String">
+ 	select m_id from member_table where m_id=#{m_id}
+ </select>
+ <!-- 로그인 -->
+ <select id="login" parameterType="memberDTO" resultType="memberDTO">
+ 	select * from member_table where m_id=#{m_id} and m_password=#{m_password}
+ </select> 
+ <!-- 회원삭제  -->
+ <delete id="delete" parameterType="long">
+ 	delete from member_table where m_number=#{m_number}
+ </delete>
  
- 
- 
+ <!-- 페이징 리스트 -->
+<select id="pagingList1" parameterType="java.util.HashMap" resultType="memberDTO">
+select * from member_table order by m_number asc limit #{start}, #{limit}
+</select> 
+
+<!-- 페이징을 위한 회원보드카운트 -->
+<select id="count" resultType="int">
+select count(m_number) from member_table 
+</select>
+
+<!-- 정보 수정을 위한 기존정보 조회 -->
+<select id="findById" parameterType="long" resultType="memberDTO">
+select * from member_table where m_number = #{m_number}
+</select>
+
+<!-- 정보 수정처리 -->
+<update id="update" parameterType="memberDTO">
+update member_table set m_password=#{new-password}, m_email=#{m_email}, m_phone=#{m_phone}
+</update>
+
+<!-- 비밀번호 확인 -->
+<select id="pwResult" parameterType="String" resultType="String">
+select m_password from member_table where m_password=#{m_password}</select>
  </mapper>
