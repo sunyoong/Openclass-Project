@@ -42,7 +42,7 @@ select * from member_table where m_number = #{m_number}
 
 <!-- 정보 수정처리 -->
 <update id="update" parameterType="memberDTO">
-update member_table set m_password=#{new-password}, m_email=#{m_email}, m_phone=#{m_phone}
+update member_table set m_password=#{m_password}, m_email=#{m_email}, m_phone=#{m_phone} where m_number=#{m_number}
 </update>
 
 <!-- 비밀번호 확인 -->

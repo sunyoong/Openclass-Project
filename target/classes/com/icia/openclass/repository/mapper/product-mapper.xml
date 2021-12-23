@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="product">
+ 
+ <!-- 클래스등록 -->
+ <insert id="save" parameterType="productDTO">
+ insert into product_table(m_id, p_name, p_contents, p_price, p_startDate, p_endDate, p_hits, p_discount, p_satisfy, p_resisNum, p_recommend)
+ values (#{m_id}, #{p_name}, #{p_contents}, #{p_price}, #{p_startDate}, #{p_endDate}, #{p_hits}, #{p_discount}, #{p_satisfy}, #{p_resisNum}, #{p_recommend})
+ </insert>
+ 
+ <!-- 전체클래스목록 -->
+ <select id="findAll" resultType="productDTO">
+ select * from product_table
+ </select>
+ 
+ <!-- 클래스 상세조회  -->
+ <select id="findById" parameterType="long" resultType="productDTO">
+ select * from product_table where p_number=#{p_number}
+ </select>
+ 
+ <!--조회수  -->
+ <update id="update" parameterType="long">
+ update product_table set p_hits=p_hits+1 where p_number=#{p_number}
+ </update>
+ 
+ <!-- 추천수 -->
+ <update id="recommend" parameterType="long">
+ update product_table set p_recommend=p_recommend+1 where p_number=#{p_number}
+ </update>
+ 
+ <!-- 페이징처리 / 게시글개수 --> 
+ <select id="boardCount" resultType="int">
+ select count(p_number) from product_table;
+ </select>
+ 
+ <!-- 페이징처리(리스트) -->
+ <select id="pagingList" parameterType="java.util.HashMap" resultType="productDTO">
+ select * from product_table order by p_number desc limit #{start}, #{limit}
+ </select>
+ </mapper> 

@@ -7,34 +7,42 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-function pwCheck(){
-	/* 비밀번호 일치여부 */
+function pwck(){
+	console.log('pwck 누르면 나오지롱');
 	const pw = document.getElementById('m_password').value;
-	const pw-ck = document.getElementById('pw-ck-result');
-	const DBpw = ${member.getM_password};
+	console.log(pw);
+	/* const DBpw = ${member.m_password};
+	console.log(DBpw);
+	 */
+	 const pwckResult = document.getElementById('pwckResult');
+	
 	$.ajax({
-		type: 'post',
-		url: '/member/pwResult',
+		type: "post",
+		url: "/member/pwResult",
 		data: {"m_password" : pw},
-		dataType: 'text',
+		dataType: "text",
 		success: function(result){
-			console.log("result : " + result);
-			if(result=="o"){
-				pw-ck.innerHTML = '비밀번호 일치';
-				
+			console.log("ajax성공");
+			if(result == "o"){
+				pwckResult.innerHTML = '비밀번호가 일치합니다.';
+				pwckResult.style.color = 'green';
 			} else{
-				pw-ck.innerHTML = '비밀번호 불일치';
+				pwckResult.innerHTML = '비밀번호 불일치';
+				pwckResult.style.color = 'red';
 			}
 		},
 		error: function(){
-			console.log("오타입니다");
+			console.log("오타 찾아요");
 		}
+		
+		
+		
 		
 	})
 	
 	
-	}
-
+	
+}
 </script>
 </head>
 <body>
@@ -42,11 +50,11 @@ function pwCheck(){
 ${member}
 
 <form action="/member/update" method="post">
-<input type="hidden" name="m_number" id="m_number">
-아이디 : <input type="text" name="m_id" id="m_id" value="${member.m_id}" onblur="idck()" readonly><br>
-비밀번호 : <input type="password" name="m_password" id="m_password" onblur="pwCheck()">
-<span id="pw-ck-result"></span>
-새로운 비밀번호 : <input type="password" name="new-password">
+<input type="hidden" name="m_number" id="m_number" value="${member.m_number}">
+아이디 : <input type="text" name="m_id" id="m_id" value="${member.m_id}" readonly><br>
+비밀번호 : <input type="password" id="m_password" onblur="pwck()">
+<span id="pwckResult"></span>
+비밀번호 재설정 : <input type="password" name="m_password">
 이름 : <input type="text" name="m_name" value="${member.m_name}" readonly><br>
 이메일 : <input type="text" name="m_email" value="${member.m_email}"><br>
 전화번호 : <input type="text" name="m_phone" value="${member.m_phone}"><br>

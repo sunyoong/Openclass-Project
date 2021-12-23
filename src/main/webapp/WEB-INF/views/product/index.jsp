@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>mypage.jsp</h2>
-<a href="/member/update?m_number=${sessionScope.memberNum}">내정보 수정</a>
-<a href="/member/order">결제내역 확인</a>
+<h2>product/index.jsp</h2>
+${sessionScope.memberNum}
+<a href="/product/myclass?m_number=${sessionScope.memberNum}">마이클래스</a>
+<a href="/product/paging?page=${page}">클래스 목록</a>
+
 
 </body>
 </html>

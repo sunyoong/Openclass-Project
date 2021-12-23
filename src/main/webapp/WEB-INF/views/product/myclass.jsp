@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>mypage.jsp</h2>
-<a href="/member/update?m_number=${sessionScope.memberNum}">내정보 수정</a>
-<a href="/member/order">결제내역 확인</a>
-
+<h2>product/mycalss.jsp</h2>
+${sessionScope.memberNum}
+<a href="/product/save?m_number=${sessionScope.memberNum}">클래스 등록</a>
+<a href="/product/paging?page=${paging.page}">클래스 목록</a>
 </body>
 </html>
