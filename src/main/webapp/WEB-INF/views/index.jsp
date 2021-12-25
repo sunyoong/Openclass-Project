@@ -18,7 +18,7 @@
 <c:if test="${sessionScope.loginId != null}">
 <a href="/member/logout">로그아웃</a>
 <a href="/member/mypage?m_number=${sessionScope.memberNum}">마이페이지</a>
-<a href="/product/index?m_number=${sessionScope.memberNum}">클래스</a>
+<a href="/product/index?m_number=${sessionScope.memberNum}&page=${page}">클래스</a>
 <a href="/member/paging">회원목록</a>
 </c:if>
 
@@ -28,7 +28,7 @@
 </c:if>
 member : ${member}
 loginUser : ${sessionScope.loginUser}
-login-member-Num : ${sessionScope.memberNum}
+login-member-Num : ${sessionScope.memberNum}re
 loginId : ${sessionScope.loginId}
 
 </body>

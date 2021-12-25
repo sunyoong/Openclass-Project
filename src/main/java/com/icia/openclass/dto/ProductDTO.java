@@ -21,7 +21,7 @@ public class ProductDTO {
 	
 	
 	private int p_satisfy; // 강의만족도 ( 만족/불만족 int로)
-	private int p_resisNum; // 인기순
+	private int p_applyNum; // 인기순(수강인원)
 	private int p_recommend; // 추천순
 	
 }

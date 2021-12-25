@@ -36,7 +36,9 @@ public class ProductController {
 	@RequestMapping(value="index", method=RequestMethod.GET)
 	public String index(@RequestParam("m_number") long m_number, @RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
 		session.setAttribute("memberNum", m_number);
-		model.addAttribute("page", page);
+		PageDTO paging = ps.paging(page);
+		model.addAttribute("page", paging.getPage());
+		System.out.println("index에서 page:" + page);
 		return "product/index";
 	}
 	
@@ -67,10 +69,12 @@ public class ProductController {
 	
 	// 클래스목록
 	@RequestMapping(value="findAll", method=RequestMethod.GET)
-	public String findAll(Model model) {
+	public String findAll(@RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
 		List<ProductDTO> productList = ps.findAll();
+		PageDTO paging = ps.paging(page);
 		System.out.println("productController.productList:" + productList);
 		model.addAttribute("productList", productList);
+		model.addAttribute("page", paging.getPage());
 		return "product/findAll";
 	}
 	
@@ -78,10 +82,13 @@ public class ProductController {
 	@RequestMapping(value="detail", method=RequestMethod.GET)
 	public String detailform(@RequestParam(value="page", required=false, defaultValue="1")int page, @RequestParam("p_number") long p_number, Model model) {
 		// 조회수
-		ps.update(p_number);
+		ps.updateHits(p_number);
 		ProductDTO product = ps.findById(p_number);
+		PageDTO paging = ps.paging(page);
 		model.addAttribute("product", product);
-		model.addAttribute("page", page);
+		model.addAttribute("page", paging.getPage());
+		System.out.println("paging.getPage():" + paging.getPage());
+		System.out.println("paging :" + paging);
 		return "product/detail";
 	}
 	
@@ -107,6 +114,65 @@ public class ProductController {
 	}
 	
 	
+	
+	//수강신청 페이지
+	@RequestMapping(value="applyform", method=RequestMethod.GET)
+	public String applyform(@RequestParam("p_number") long p_number,Model model) {
+		ProductDTO product = ps.findById(p_number);
+		model.addAttribute("product", product);
+		
+		return "order/order";
+	}
+	
+
+	// 수강신청인원 저장 결과 detail.jsp로 넘기기 
+	@RequestMapping(value="applyNum", method=RequestMethod.POST)
+	@ResponseBody public int apply(@RequestParam("p_number") long p_number) {
+		ps.apply(p_number); // db에 수강신청인원 저장
+		ProductDTO product = ps.findById(p_number);
+		return product.getP_applyNum();
+	}
+	
+	
+	// 만족도 평가
+	@RequestMapping(value="rating", method=RequestMethod.GET)
+	@ResponseBody
+	public int rating(@ModelAttribute ProductDTO product){//, @RequestParam("p_satisfy")int p_satisfy, @RequestParam("p_number") long p_number) {
+		ps.rating(product); // db에 만족도 저장// 이건 성공
+		int ratingResult = ps.ratingResult(product.getP_number()); // p_number의 평점들 가져옴
+		System.out.println("productController.ratingResult : " + ratingResult);// 이거 성공
+		int applyNum = ps.applyNum(product.getP_number());// 수강생 인원수 
+		System.out.println(applyNum);
+		if(applyNum==0) {
+			applyNum=1;
+		}
+		int satisfy = ratingResult / applyNum;
+		System.out.println("satisfy: " + satisfy);
+		return satisfy;
+	}
+	
+	
+	// 글 삭제
+	@RequestMapping(value="delete", method=RequestMethod.GET)
+	public String delete(@RequestParam("p_number") long p_number) {
+		ps.delete(p_number);
+		return "redirect:/product/paging";
+	}
+	
+	// 글 수정 화면요청
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateform(Model model, @RequestParam("p_number") long p_number) {
+		ProductDTO product = ps.findById(p_number);
+		model.addAttribute("product", product);
+		return "product/update";
+}
+	// 클래스 수정처리
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String update(@ModelAttribute ProductDTO product) {
+		ps.update(product);
+		
+		return "redirect:/product/paging?p_number=" + product.getP_number();
+}	
 	
 	
 	

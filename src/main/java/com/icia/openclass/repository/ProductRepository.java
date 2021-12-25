@@ -30,8 +30,8 @@ public class ProductRepository {
 		
 	}
 
-	public void update(long p_number) {
-		sql.update("product.update", p_number);
+	public void updateHits(long p_number) {
+		sql.update("product.updateHits", p_number);
 	}
 	// 추천수
 	public void recommend(long p_number) {
@@ -49,6 +49,41 @@ public class ProductRepository {
 	public List<ProductDTO> pagingList1(Map<String, Integer> pagingParam) {
 		return sql.selectList("product.pagingList", pagingParam);
 	}
+
+	public void product(long p_number) {
+		
+	}
+
+	public int ratingResult(long p_number) {
+		return sql.selectOne("product.ratingResult", p_number);
+	}
+
+	public int applyNum(long p_number) {
+		return sql.selectOne("product.applyNum", p_number);
+	}
+
+
+	public void rating(ProductDTO product) {
+		sql.update("product.rating", product);
+		
+	}
+
+	public void apply(long p_number) {
+		sql.update("product.apply", p_number);
+		
+	}
+
+	public void delete(long p_number) {
+		sql.delete("product.delete", p_number);
+		
+	}
+	//클래스 수정처리
+	public void update(ProductDTO product) {
+		sql.update("product.update", product);
+		
+	}
+
+	
 
 
 }

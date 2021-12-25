@@ -36,10 +36,10 @@ public class ProductServiceImpl implements ProductService{
 		return product;
 	}
 
-
+	// 조회수
 	@Override
-	public void update(long p_number) {
-		pr.update(p_number);
+	public void updateHits(long p_number) {
+		pr.updateHits(p_number);
 		
 	}
 
@@ -82,6 +82,51 @@ public class ProductServiceImpl implements ProductService{
 		List<ProductDTO> productList = pr.pagingList1(pagingParam);
 		return productList;
 	}
+
+	// 만족도 합계 저장
+	@Override
+	public void rating(ProductDTO product) {
+		System.out.println(product);
+		pr.rating(product);
+		
+		
+	}
+
+	// 평점합계
+	@Override
+	public int ratingResult(long p_number) {
+		int result = pr.ratingResult(p_number);
+		return result;
+	}
+
+	// 수강신청인원
+	@Override
+	public int applyNum(long p_number) {
+		return pr.applyNum(p_number);
+	}
+
+	// 수강신청 인원저장
+	@Override
+	public void apply(long p_number) {
+		pr.apply(p_number);
+	}
+
+	// 클래스 삭제
+	@Override
+	public void delete(long p_number) {
+		pr.delete(p_number);
+		
+	}
+
+	// 수정처리
+	@Override
+	public void update(ProductDTO product) {
+		pr.update(product);
+	}
+
+
+
+
 	
 	
 

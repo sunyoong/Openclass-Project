@@ -6,8 +6,8 @@
  
  <!-- 클래스등록 -->
  <insert id="save" parameterType="productDTO">
- insert into product_table(m_id, p_name, p_contents, p_price, p_startDate, p_endDate, p_hits, p_discount, p_satisfy, p_resisNum, p_recommend)
- values (#{m_id}, #{p_name}, #{p_contents}, #{p_price}, #{p_startDate}, #{p_endDate}, #{p_hits}, #{p_discount}, #{p_satisfy}, #{p_resisNum}, #{p_recommend})
+ insert into product_table(m_number, m_id, p_name, p_contents, p_price, p_startDate, p_endDate, p_hits, p_discount, p_satisfy, p_applyNum, p_recommend)
+ values (#{m_number}, #{m_id}, #{p_name}, #{p_contents}, #{p_price}, #{p_startDate}, #{p_endDate}, #{p_hits}, #{p_discount}, #{p_satisfy}, #{p_applyNum}, #{p_recommend})
  </insert>
  
  <!-- 전체클래스목록 -->
@@ -21,7 +21,7 @@
  </select>
  
  <!--조회수  -->
- <update id="update" parameterType="long">
+ <update id="updateHits" parameterType="long">
  update product_table set p_hits=p_hits+1 where p_number=#{p_number}
  </update>
  
@@ -39,4 +39,35 @@
  <select id="pagingList" parameterType="java.util.HashMap" resultType="productDTO">
  select * from product_table order by p_number desc limit #{start}, #{limit}
  </select>
+ 
+ <!-- 만족도 저장 -->
+ <update id="rating" parameterType="productDTO">
+ update product_table set p_satisfy = p_satisfy + #{p_satisfy} where p_number = #{p_number}
+ </update>
+ 
+ <!-- 만족도 합계 불러오기 -->
+ <select id="ratingResult" parameterType="long" resultType="int">
+ select p_satisfy from product_table where p_number = #{p_number}
+ </select>
+ 
+<!-- 수강신청인원 불러오기 -->
+<select id="applyNum" parameterType="long" resultType="int">
+select p_applyNum from product_table where p_number = #{p_number}
+</select>
+
+<!-- 수강신청한 사람 저장 -->
+<update id="apply" parameterType="long">
+update product_table set p_applyNum = p_applyNum+1 where p_number=#{p_number}
+</update>
+
+<!-- 게시글 삭제  -->
+<delete id="delete" parameterType="long">
+delete from product_table where p_number = #{p_number}
+</delete>
+
+<!-- 클래스 수정 -->
+<update id="update" parameterType="productDTO">
+update product_table set p_name=#{p_name}, p_contents=#{p_contents}, p_price=#{p_price}, p_startDate=#{p_startDate}, p_endDate=#{p_endDate} where p_number = #{p_number} 
+</update>
+
  </mapper> 

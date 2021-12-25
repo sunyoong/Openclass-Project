@@ -15,7 +15,7 @@ public interface ProductService {
 	// 상세조회
 	ProductDTO findById(long p_number);
 
-	void update(long p_number);
+	void updateHits(long p_number);
 
 	void recommend(long p_number);
 
@@ -24,6 +24,22 @@ public interface ProductService {
 	// 페이징 처리 : 페이지 리스트를 상품 리스트에 추가.
 
 	List<ProductDTO> pagingList(int page);
+
+	// 만족도 합계 저장
+
+	void rating(ProductDTO product);
+
+	// 평점합계
+	int ratingResult(long p_number);
+
+	int applyNum(long p_number);
+	//수강신청 인원수저장
+	void apply(long p_number);
+	// 클래스 삭제
+	void delete(long p_number);
+
+	void update(ProductDTO product);
+
 	
 
 }

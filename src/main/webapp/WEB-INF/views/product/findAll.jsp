@@ -22,7 +22,7 @@ ${paging}
 <option value="" selected></option>
 <option value="hits" id="hits-list">조회수</option>
 <option value="satisfy" id="satis-list">만족도순</option>
-<option value="resisNum" id="resis-list">수강인원</option>
+<option value="applyNum" id="resis-list">수강인원</option>
 <option value="recommend" id="recom-list">추천수</option>
 </select>
 <table class = "table" id="classList">
@@ -36,12 +36,19 @@ ${paging}
 		<th>종료일</th>
 		<th>할인율</th>
 		<th>조회수</th>
+		<th>만족도</th>
+		<th>수강신청인원</th>
+		<th>추천수</th>
+		<th>삭제</th>
+		<th>수정</th>
+	
+		
 	</tr>
 	<c:forEach items="${productList}" var="product">
 		<tr>
 			<td>${product.p_number}</td>
 			<td>${product.m_id}</td>
-			<td><a href="/product/detail?p_number=${product.p_number}&page=${page}">${product.p_name}</a></td>
+			<td><a href="/product/detail?p_number=${product.p_number}&page=${paging.page}">${product.p_name}</a></td>
 			<td>${product.p_contents}</td>
 			<td>${product.p_price}</td>
 			<td>${product.p_startDate}</td>
@@ -49,8 +56,10 @@ ${paging}
 			<td>${product.p_discount}</td>
 			<td>${product.p_hits}</td>
 			<td>${product.p_satisfy}</td>
-			<td>${product.p_resisNum}</td>
+			<td>${product.p_applyNum}</td>
 			<td>${product.p_recommend}</td>
+			<td><a href="/product/delete?p_number=${product.p_number}">삭제</a></td>
+			<td><a href="/product/update?p_number=${product.p_number}">수정</a></td>
 		</tr>	
 	</c:forEach>
 </table>

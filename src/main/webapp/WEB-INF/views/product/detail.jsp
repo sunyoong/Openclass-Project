@@ -37,15 +37,65 @@
 		
 		
 	}
-
-</script>
-<script>
-/* 별점 */
-	function star(){
-	console.log('star');
+	
+	
+	
+	/* 별점 */
+	function stars(){
+	console.log("stars");
+	const ratingResult = document.getElementById("rating").value;
+	const p_number = "${product.p_number}";
+	
+	$.ajax({
+		type: "get",
+		url:"/product/rating",
+		data: {"p_satisfy" : ratingResult, "p_number" : p_number},
+		dataType: "text",
+		success: function(result){
+			console.log("ajax성공");
+			console.log(result);
+		},
+		error: function(){
+			console.log("오타가 있나봄..");
+		}
+		
+	})
 	
 }
+	
+	
+	/* 수강신청 */
+	
+	function apply(){
+		console.log('function resist()');
+		const p_applyNum = "${product.p_applyNum}";
+		const p_number = "${product.p_number}";
+		$.ajax({
+			type:"post",
+			url:"/product/applyNum",
+			data: {"p_applyNum" : p_applyNum, "p_number" : p_number},
+			dataType: "text",
+			success : function(result){
+				console.log("result : " + result);
+			},
+			error: function(){
+				console.log("오타입니다");
+			}
+			
+			
+			
+			
+		})
+		
+		
+		
+		
+		
+	}
+	
+	
 </script>
+
 
 
 </head>
@@ -53,15 +103,20 @@
 <h2>product/detail.jsp</h2>
 <a href="/product/paging?page=${page}">목록으로</a>
 ${product}
+<a href="/product/applyform?p_number=${product.p_number}" onclick="apply()">수강하기</a> 
+
 <button onclick="recomBtn()">추천하기</button>
-<select id="rating" name="stars">
-<option value="" selected>만족도</option>
+<select id="rating" onchange="stars()">
+<option disabled>만족도</option>
 <option value="1">★</option>
 <option value="2">★★</option>
 <option value="3">★★★</option>
 <option value="4">★★★★</option>
 <option value="5">★★★★★</option>
 </select>
+
+
+
 
 <table>
 	<tr>
@@ -88,8 +143,8 @@ ${product}
 		<td>${product.p_endDate}</td>
 		<td>${product.p_hits}</td>
 		<td>${product.p_discount}</td>
-		<td>${product.p_satisfy}</td>
-		<td>${product.p_resisNum}</td>
+		<td id="satisfy">${product.p_satisfy}</td>
+		<td id="applyNum">${product.p_applyNum}</td>
 		<td id="recomResult">${product.p_recommend}</td>
 	</tr>	
 </table>

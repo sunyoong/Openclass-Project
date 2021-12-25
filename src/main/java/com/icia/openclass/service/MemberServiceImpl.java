@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.repository.MemberRepository;
-
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberRepository mr;
 	
