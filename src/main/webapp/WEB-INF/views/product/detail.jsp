@@ -66,7 +66,7 @@
 	
 	/* 수강신청 */
 	
-	function apply(){
+/* 	function apply(){
 		console.log('function resist()');
 		const p_applyNum = "${product.p_applyNum}";
 		const p_number = "${product.p_number}";
@@ -92,7 +92,7 @@
 		
 		
 	}
-	
+	 */
 	
 </script>
 
@@ -103,9 +103,11 @@
 <h2>product/detail.jsp</h2>
 <a href="/product/paging?page=${page}">목록으로</a>
 ${product}
-<a href="/product/applyform?p_number=${product.p_number}" onclick="apply()">수강하기</a> 
-
+<a href="/product/applyform?p_number=${product.p_number}&m_number=${sessionScope.memberNum}">수강하기</a> 
+<!-- 추천하기 -->
 <button onclick="recomBtn()">추천하기</button>
+
+<!-- 만족도 -->
 <select id="rating" onchange="stars()">
 <option disabled>만족도</option>
 <option value="1">★</option>
@@ -116,7 +118,7 @@ ${product}
 </select>
 
 
-
+<!-- 수강인원 -->
 
 <table>
 	<tr>

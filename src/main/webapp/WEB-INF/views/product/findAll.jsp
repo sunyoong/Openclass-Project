@@ -16,6 +16,7 @@
 </head>
 <body>
 <h2>product/findAll.jsp</h2>
+로그인 : ${sessionScope.memberNum}
 ${productList}<br>
 ${paging}
 <select name="list">

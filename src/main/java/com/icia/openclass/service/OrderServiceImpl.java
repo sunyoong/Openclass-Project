@@ -1,5 +1,7 @@
 package com.icia.openclass.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +14,24 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository or;
 
-
-	@Override
-	public OrderDTO findById(long p_number) {
-		return or.findById(p_number);
-	}
-
-
 	@Override
 	public void save(OrderDTO order) {
-		or.save(order);
-		
+		 or.save(order);
 	}
-
 
 	@Override
-	public OrderDTO findorder(long o_number) {
-		OrderDTO findOrder = or.findorder(o_number);
-		return findOrder;
+	public OrderDTO findById(long o_number) {
+		return or.findById(o_number);
+		
+
+
 	}
 
 
-
-
-	
-	
 }
+
+
+
+	
+	
+

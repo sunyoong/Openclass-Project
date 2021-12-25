@@ -1,5 +1,6 @@
 package com.icia.openclass.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.icia.openclass.dto.OrderDTO;
 import com.icia.openclass.dto.ProductDTO;
@@ -23,32 +23,26 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
-	@RequestMapping(value="index", method=RequestMethod.GET)
-	public String index(@RequestParam("p_number") long p_number, Model model) {
-		os.findById(p_number);
-//		이거 order은 결제 정보를 담는 DTO잖아요
-//		그니까 order을 불러 오는게 아니고 order안에 필요한 정보를 가져와야해요 그니까
-//		product의 정보를 가져와서 홈페이지에 출력을 하고 홈페이지에서 그 값으로 보여주는거고
-//		
-//		밑에 payment에서 결제를 진행하고 order테이블을 저장하는거죠
-//		그런데 그 order.jsp에서 o_number가 필요한 것 같아서 order로 불러와야 하는건가 했던건데
-//		ajax해서 payment진행할때.
-		return "order/order";
+	@RequestMapping(value="save", method=RequestMethod.POST)
+	public String save(@ModelAttribute OrderDTO order, @RequestParam("m_number") long m_number, Model model) {
+	os.save(order);
+	model.addAttribute("order", order);
+	if(order.getO_payment()== "card") {
+		return "order/card";
+	} else {
+		return "order/cash";	
+	}
+		 
 	}
 	
 	
-
-	
-	@RequestMapping(value="payment", method=RequestMethod.POST)
-	public OrderDTO save(@ModelAttribute OrderDTO order, @RequestParam("p_number") long p_number) {
-		 os.save(order);
-		 OrderDTO findorder = os.findorder(order.getO_number());
-		 System.out.println(findorder);
-		return findorder;
+	@RequestMapping(value="cash-pay", method=RequestMethod.POST)
+	public String cashPay(@RequestParam("p_number") long p_number, Model model) {
+		ps.apply(p_number);
+		ProductDTO product =  ps.findById(p_number);
+		model.addAttribute("product", product);
+		return "order/cash-pay";
 	}
-	
-	
-	
 	
 	
 }

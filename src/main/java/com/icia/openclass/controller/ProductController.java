@@ -117,10 +117,11 @@ public class ProductController {
 	
 	//수강신청 페이지
 	@RequestMapping(value="applyform", method=RequestMethod.GET)
-	public String applyform(@RequestParam("p_number") long p_number,Model model) {
+	public String applyform(@RequestParam("p_number") long p_number, @RequestParam("m_number") long m_number, Model model) {
 		ProductDTO product = ps.findById(p_number);
+		MemberDTO member = ms.findById(m_number);
 		model.addAttribute("product", product);
-		
+		model.addAttribute("member", member);
 		return "order/order";
 	}
 	
