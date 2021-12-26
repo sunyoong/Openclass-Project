@@ -48,4 +48,9 @@ update member_table set m_password=#{m_password}, m_email=#{m_email}, m_phone=#{
 <!-- 비밀번호 확인 -->
 <select id="pwResult" parameterType="String" resultType="String">
 select m_password from member_table where m_password=#{m_password}</select>
+
+
+
+
  </mapper>
+ 

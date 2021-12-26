@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.dto.ProductDTO;
 
@@ -81,6 +82,10 @@ public class ProductRepository {
 	public void update(ProductDTO product) {
 		sql.update("product.update", product);
 		
+	}
+
+	public List<ProductDTO> applymember(long p_number) {
+		return sql.selectList("product.applymember", p_number);
 	}
 
 	

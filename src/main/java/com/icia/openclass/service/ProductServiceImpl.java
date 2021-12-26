@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.dto.ProductDTO;
 import com.icia.openclass.repository.ProductRepository;
@@ -122,6 +123,13 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void update(ProductDTO product) {
 		pr.update(product);
+	}
+
+	// 수강신청한 회원목록
+	@Override
+	public List<ProductDTO> applymember(long p_number) {
+		List<ProductDTO> applyList = pr.applymember(p_number);
+		return applyList;
 	}
 
 

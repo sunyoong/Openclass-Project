@@ -59,6 +59,10 @@ public class MemberRepository {
 	public String pwResult(String m_password) {
 		return sql.selectOne("member.pwResult", m_password);
 	}
+	public List<MemberDTO> applymember(long p_number) {
+		
+		return sql.selectList("member.applymember", p_number);
+	}
 
 
 	

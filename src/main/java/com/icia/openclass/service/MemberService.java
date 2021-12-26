@@ -27,6 +27,7 @@ public interface MemberService {
 	// 정보수정 페이지에서 비밀번호 일치여부
 	String pwResult(String m_password);
 	
+	
 
 	
 }

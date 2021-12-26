@@ -23,6 +23,7 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
+	// 클래스 신청& 결제
 	@RequestMapping(value="save", method=RequestMethod.POST)
 	public String save(@ModelAttribute OrderDTO order, @RequestParam("m_number") long m_number, Model model) {
 	os.save(order);

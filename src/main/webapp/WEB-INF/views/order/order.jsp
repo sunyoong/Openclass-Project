@@ -13,6 +13,7 @@
 <body>
 <h2>order.jsp</h2>
 ${member}
+apply: ${apply}
 
 <h2>수강신청</h2>
 <form action="/order/save?m_number=${sessionScope.memberNum}" method="post" name="order_form">

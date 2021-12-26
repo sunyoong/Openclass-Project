@@ -123,6 +123,7 @@ ${product}
 <table>
 	<tr>
 		<th>게시글번호</th>
+		<th>회원번호</th>
 		<th>멘토</th>
 		<th>클래스이름</th>
 		<th>클래스내용</th>
@@ -137,6 +138,7 @@ ${product}
 	</tr>
 	<tr>
 		<td>${product.p_number}</td>
+		<td>${product.m_number}</td>
 		<td>${product.m_id}</td>
 		<td>${product.p_name}</td>
 		<td>${product.p_contents}</td>
@@ -150,5 +152,7 @@ ${product}
 		<td id="recomResult">${product.p_recommend}</td>
 	</tr>	
 </table>
+
+<a href="/product/applymember?p_number=${product.p_number}">신청 회원목록</a>
 </body>
 </html>

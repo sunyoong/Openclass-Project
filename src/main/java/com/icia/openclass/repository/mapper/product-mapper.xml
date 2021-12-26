@@ -57,7 +57,7 @@ select p_applyNum from product_table where p_number = #{p_number}
 
 <!-- 수강신청한 사람 저장 -->
 <update id="apply" parameterType="long">
-update product_table set p_applyNum = p_applyNum+1 where p_number=#{p_number}
+update product_table set p_applyNum = p_applyNum+1, m_number=#{m_number} where p_number=#{p_number}
 </update>
 
 <!-- 게시글 삭제  -->
@@ -70,4 +70,9 @@ delete from product_table where p_number = #{p_number}
 update product_table set p_name=#{p_name}, p_contents=#{p_contents}, p_price=#{p_price}, p_startDate=#{p_startDate}, p_endDate=#{p_endDate} where p_number = #{p_number} 
 </update>
 
+<!-- 클래스 신청한 회원목록 -->
+<select id="applymember" parameterType="long" resultType="productDTO">
+select * from product_table where p_number = #{p_number}
+
+</select>
  </mapper> 

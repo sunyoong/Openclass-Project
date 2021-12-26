@@ -1,7 +1,6 @@
 package com.icia.openclass.dto;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 import lombok.Data;
 

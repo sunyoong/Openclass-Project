@@ -1,6 +1,8 @@
 package com.icia.openclass.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -120,6 +122,14 @@ public class ProductController {
 	public String applyform(@RequestParam("p_number") long p_number, @RequestParam("m_number") long m_number, Model model) {
 		ProductDTO product = ps.findById(p_number);
 		MemberDTO member = ms.findById(m_number);
+		// ApplyDTO에 수강신청회원 정보 저장
+		Map<String, Long> apply = new HashMap<String, Long>();
+		apply.put("classNum", product.getM_number());
+		apply.put("memberNum", member.getM_number());
+		System.out.println(apply);
+		
+		
+		model.addAttribute("apply", apply);
 		model.addAttribute("product", product);
 		model.addAttribute("member", member);
 		return "order/order";
@@ -173,8 +183,20 @@ public class ProductController {
 		ps.update(product);
 		
 		return "redirect:/product/paging?p_number=" + product.getP_number();
-}	
+	}
 	
-	
+	// 클래스 신청한 회원목록
+	@RequestMapping(value="applymember", method=RequestMethod.GET)
+	public String applyMember(@RequestParam("p_number") long p_number, Model model) {
+		// 신청회원 리스트
+		List<ProductDTO> applyList = ps.applymember(p_number);
+		// 해당번호 게시글
+		
+		//			List<ProductDTO> applyList = ps.applymember(p_number);
+//	System.out.println("applymember : " + applyList);
+//	model.addAttribute("applyList", applyList);
+		
+		return "product/applymember?p_number=" + p_number;
+	}
 	
 }
