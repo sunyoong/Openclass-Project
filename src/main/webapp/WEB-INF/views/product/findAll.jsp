@@ -77,6 +77,21 @@ paging : ${paging}
 <option value="p_recommend">추천수</option>
 </select>
 <!-- </form> -->
+
+<!-- 검색기능 -->
+<form action="/product/search" method="get">
+<!-- 검색분류 -->
+<select name="searchType">
+<!-- <option value="m_id" value="p_name">전체</option> -->
+<option value="m_id">멘토</option>
+<option value="p_name">클래스명</option>
+</select>
+<!-- 검색어입력 -->
+<input type="text" name="keyword" placeholder="검색어를 입력하세요"> 
+<input type="submit" value="검색">
+</form>
+
+
 <table class = "table" id="classList">
 	<tr>
 		<th>번호</th>
@@ -124,6 +139,7 @@ paging : ${paging}
 </table>
 
 <!-- 페이징처리 -->
+
 <div>
 <c:choose>
 <c:when test="${paging.page<=1}">
@@ -154,13 +170,7 @@ paging : ${paging}
 	<a href="/product/paging?page=${paging.page+1}">[다음]</a>&nbsp;
 </c:otherwise>
 </c:choose>
-
 </div>
-
-
-
-
-
 
 </body>
 </html>

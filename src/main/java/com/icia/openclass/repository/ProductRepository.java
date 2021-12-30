@@ -92,6 +92,11 @@ public class ProductRepository {
 		return sql.selectList("product.select", select);
 	}
 
+
+	public List<ProductDTO> search(Map<String, String> searchList) {
+		return sql.selectList("product.search", searchList);
+	}
+
 	
 
 

@@ -225,7 +225,7 @@ public class ProductController {
 //	}
 
 	
-	// 조회수 리스트별로 조회(ajax) + 페이징처리
+	// 조회수 리스트별로 조회(ajax) + 페이징처리(추후에..)
 	@RequestMapping(value="selectList", method=RequestMethod.GET)
 	public @ResponseBody List<ProductDTO> SelectList
 	(@RequestParam("select") String select, @RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
@@ -234,9 +234,24 @@ public class ProductController {
 		return pList;
 	}
 	
+	// 검색기능
+	@RequestMapping(value="search", method=RequestMethod.GET)
+	public String search(@RequestParam(value="page", required=false, defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, Model model) {
+		List<ProductDTO> productList = ps.search(searchType, keyword);
+		model.addAttribute("productList", productList);
+		
+		return "product/findAll";
+	}
 	
-
-
-	
+	// 페이징처리(검색)
+	/*
+	 * @RequestMapping(value="searchPaging", method=RequestMethod.GET) public String
+	 * searchPaging(@RequestParam(value="page", required=false, defaultValue="1")int
+	 * page, Model model) { List<ProductDTO> spList = ps.spList(page); PageDTO
+	 * Paging = ps.paging(page); model.addAttribute("paging", Paging);
+	 * model.addAttribute("ProductList", spList);
+	 * System.out.println("ProductController.paging : " + spList); return
+	 * "product/findAll"; }
+	 */
 	
 }

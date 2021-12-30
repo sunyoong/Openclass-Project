@@ -77,6 +77,12 @@ select * from product_table where p_number = #{p_number}
 </select>
 
 <select id="select" parameterType="String" resultType="productDTO">
-select * from product_table order by ${select} desc, p_name asc;
+select * from product_table order by ${select} desc, p_name asc
 </select>
+
+<!-- 검색  -->
+<select id="search" parameterType="java.util.HashMap" resultType="productDTO">
+select * from product_table where ${type} like concat ('%', #{word}, '%')
+</select>
+
  </mapper> 

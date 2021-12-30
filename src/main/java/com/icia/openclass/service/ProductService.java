@@ -44,6 +44,8 @@ public interface ProductService {
 
 	List<ProductDTO> selectList(String select);
 
+	List<ProductDTO> search(String searchType, String keyword);
+
 	
 
 }

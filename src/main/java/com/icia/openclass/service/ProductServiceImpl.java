@@ -135,7 +135,7 @@ public class ProductServiceImpl implements ProductService{
 
 
 
-
+	// 조회수,인기순... 목록정렬
 	@Override
 	public List<ProductDTO> selectList(String select) {
 		List<ProductDTO> selectList = pr.selectList(select);
@@ -146,6 +146,16 @@ public class ProductServiceImpl implements ProductService{
 		
 		return selectList;
 		
+	}
+
+	// 검색
+	@Override
+	public List<ProductDTO> search(String searchType, String keyword) {
+		Map<String, String> searchList = new HashMap<String, String>();
+		searchList.put("type", searchType);
+		searchList.put("word", keyword);
+		List<ProductDTO> searchResult = pr.search(searchList);
+		return searchResult;
 	}
 
 
