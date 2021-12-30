@@ -12,4 +12,10 @@ values (#{m_number}, #{m_id}, #{p_number}, #{p_name}, #{p_price}, #{o_payment}, 
 select * from order_table where o_number=#{o_number}
 </select>
 
+<delete id="delete" parameterType="long">
+delete from order_table where p_number = #{p_number}
+</delete>
+
+
+
  </mapper>

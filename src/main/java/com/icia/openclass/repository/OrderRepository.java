@@ -22,6 +22,11 @@ public class OrderRepository {
 		return sql.selectOne("order.findById", o_number);
 	}
 
+	public void delete(long p_number) {
+		sql.delete("order.delete", p_number);
+		
+	}
+
 
 
 

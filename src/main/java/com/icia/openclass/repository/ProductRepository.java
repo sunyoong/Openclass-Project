@@ -73,7 +73,7 @@ public class ProductRepository {
 		sql.update("product.apply", p_number);
 		
 	}
-
+	// 게시글 삭제
 	public void delete(long p_number) {
 		sql.delete("product.delete", p_number);
 		
@@ -86,6 +86,10 @@ public class ProductRepository {
 
 	public List<ProductDTO> applymember(long p_number) {
 		return sql.selectList("product.applymember", p_number);
+	}
+
+	public List<ProductDTO> selectList(String select) {
+		return sql.selectList("product.select", select);
 	}
 
 	

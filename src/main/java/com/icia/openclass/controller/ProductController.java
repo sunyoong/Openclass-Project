@@ -1,8 +1,6 @@
 package com.icia.openclass.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,11 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.icia.openclass.dto.ApplyDTO;
 import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.dto.ProductDTO;
+import com.icia.openclass.dto.ReplyDTO;
+import com.icia.openclass.service.ApplyService;
 import com.icia.openclass.service.MemberService;
+import com.icia.openclass.service.OrderService;
 import com.icia.openclass.service.ProductService;
+import com.icia.openclass.service.ReplyService;
 
 @Controller
 @RequestMapping(value="/product/*")
@@ -32,7 +35,16 @@ public class ProductController {
 	private ProductService ps;
 	
 	@Autowired
+	private ApplyService as;
+	
+	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private OrderService os;
+	
+	@Autowired
+	private ReplyService rs;
 	
 	// 클래스 index 페이지로 이동
 	@RequestMapping(value="index", method=RequestMethod.GET)
@@ -56,11 +68,10 @@ public class ProductController {
 	
 	// 클래스 등록처리
 	@RequestMapping(value="save", method=RequestMethod.POST)
-	public String save(@ModelAttribute ProductDTO product) {
+	public String save(@ModelAttribute ProductDTO product, @RequestParam(value="page", required=false, defaultValue="1")int page) {
 		System.out.println("product");
 		ps.save(product);
-	
-		return "product/index";
+		return "redirect:/product/paging?page="+page; 
 	}
 	
 	// 마이클래스 화면요청
@@ -72,11 +83,11 @@ public class ProductController {
 	// 클래스목록
 	@RequestMapping(value="findAll", method=RequestMethod.GET)
 	public String findAll(@RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
-		List<ProductDTO> productList = ps.findAll();
+		List<ProductDTO> product = ps.findAll();
 		PageDTO paging = ps.paging(page);
-		System.out.println("productController.productList:" + productList);
-		model.addAttribute("productList", productList);
+		model.addAttribute("productList", product);
 		model.addAttribute("page", paging.getPage());
+		System.out.println("productController.productList:" + product);
 		return "product/findAll";
 	}
 	
@@ -91,6 +102,16 @@ public class ProductController {
 		model.addAttribute("page", paging.getPage());
 		System.out.println("paging.getPage():" + paging.getPage());
 		System.out.println("paging :" + paging);
+		
+		// 수강신청 회원목록 조회 후 detail.jsp로 보내기
+		List<ApplyDTO> applyList = as.findAll(p_number);
+		model.addAttribute("applyList", applyList);
+		
+		// 댓글 목록도 화면으로 보내기
+		List<ReplyDTO> replyList = rs.findAll(p_number);
+		model.addAttribute("replyList", replyList);
+		
+		
 		return "product/detail";
 	}
 	
@@ -105,13 +126,15 @@ public class ProductController {
 		
 }
 	
-	// 페이징처리
+	// 페이징처리 전체목록조회
 	@RequestMapping(value="paging", method=RequestMethod.GET)
 	public String paging(@RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
-		PageDTO paging = ps.paging(page);
 		List<ProductDTO> productList = ps.pagingList(page);
+		// 여기에 전체목록 불러오는 리스트를 또 추가해야 하나요..? 
+		PageDTO paging = ps.paging(page);
 		model.addAttribute("paging", paging);
 		model.addAttribute("productList", productList);
+		System.out.println("ProductController.paging : " + productList);
 		return "product/findAll";
 	}
 	
@@ -123,14 +146,14 @@ public class ProductController {
 		ProductDTO product = ps.findById(p_number);
 		MemberDTO member = ms.findById(m_number);
 		// ApplyDTO에 수강신청회원 정보 저장
-		Map<String, Long> apply = new HashMap<String, Long>();
-		apply.put("classNum", product.getM_number());
-		apply.put("memberNum", member.getM_number());
-		System.out.println(apply);
-		
-		
-		model.addAttribute("apply", apply);
-		model.addAttribute("product", product);
+//		Map<String, Long> apply = new HashMap<String, Long>();
+//		apply.put("classNum", product.getM_number());
+//		apply.put("memberNum", member.getM_number());
+//		System.out.println(apply);
+//		
+//		
+//		model.addAttribute("apply", apply);
+	    model.addAttribute("product", product);
 		model.addAttribute("member", member);
 		return "order/order";
 	}
@@ -165,9 +188,11 @@ public class ProductController {
 	
 	// 글 삭제
 	@RequestMapping(value="delete", method=RequestMethod.GET)
-	public String delete(@RequestParam("p_number") long p_number) {
+	public String delete(@RequestParam("p_number") long p_number, @RequestParam(value="page", required=false, defaultValue="1")int page) {
+		// 참조관계 때문에 orderDTO에서 먼저 삭제한 뒤 게시글 삭제 가능
+		os.delete(p_number);
 		ps.delete(p_number);
-		return "redirect:/product/paging";
+		return "redirect:/product/paging?page=" + page;
 	}
 	
 	// 글 수정 화면요청
@@ -186,17 +211,32 @@ public class ProductController {
 	}
 	
 	// 클래스 신청한 회원목록
-	@RequestMapping(value="applymember", method=RequestMethod.GET)
-	public String applyMember(@RequestParam("p_number") long p_number, Model model) {
-		// 신청회원 리스트
-		List<ProductDTO> applyList = ps.applymember(p_number);
-		// 해당번호 게시글
-		
-		//			List<ProductDTO> applyList = ps.applymember(p_number);
-//	System.out.println("applymember : " + applyList);
-//	model.addAttribute("applyList", applyList);
-		
-		return "product/applymember?p_number=" + p_number;
+//	@RequestMapping(value="applymember", method=RequestMethod.GET)
+//	public String applyMember(@RequestParam("p_number") long p_number, Model model) {
+//		// 신청회원 리스트
+//		List<ProductDTO> applyList = ps.applymember(p_number);
+//		// 해당번호 게시글
+//		
+//		//			List<ProductDTO> applyList = ps.applymember(p_number);
+////	System.out.println("applymember : " + applyList);
+////	model.addAttribute("applyList", applyList);
+//		
+//		return "product/applymember?p_number=" + p_number;
+//	}
+
+	
+	// 조회수 리스트별로 조회(ajax) + 페이징처리
+	@RequestMapping(value="selectList", method=RequestMethod.GET)
+	public @ResponseBody List<ProductDTO> SelectList
+	(@RequestParam("select") String select, @RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
+		System.out.println("productController.selectList");
+		List<ProductDTO> pList = ps.selectList(select);
+		return pList;
 	}
+	
+	
+
+
+	
 	
 }

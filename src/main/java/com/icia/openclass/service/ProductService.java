@@ -2,7 +2,6 @@ package com.icia.openclass.service;
 
 import java.util.List;
 
-import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.dto.ProductDTO;
 
@@ -42,6 +41,8 @@ public interface ProductService {
 	void update(ProductDTO product);
 	// 수강신청한 회원목록(클래스별로)
 	List<ProductDTO> applymember(long p_number);
+
+	List<ProductDTO> selectList(String select);
 
 	
 

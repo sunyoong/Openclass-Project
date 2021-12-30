@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>cash-pay</h2>
+<h2>cash-pay(무통장 계좌 출력페이지)</h2>
+${applyList}
 <a href="../product/detail?p_number=${product.p_number}">클래스로 돌아가기</a>
 </body>
 </html>

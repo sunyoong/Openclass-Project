@@ -9,7 +9,7 @@
 <body>
 <h2>product/save.jsp</h2>
 
-<form action="/product/save?m_number=${m_number}" method="post">
+<form action="/product/save?m_number=${sessionScope.memberNum}" method="post">
 <input type="hidden" name="m_number" value=${m_number}>
 멘토(작성자) : <input type="text" name="m_id" value="${m_id}" readonly><br>
 클래스 이름 : 	<input type="text" name="p_name" ><br>

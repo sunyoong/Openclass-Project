@@ -76,11 +76,12 @@ public class ProductServiceImpl implements ProductService{
 	// 페이징처리(리스트)
 	@Override
 	public List<ProductDTO> pagingList(int page) {
-		int pagingStart = (page-1) * PAGE_LIMIT +1;
+		int pagingStart = (page-1) * PAGE_LIMIT; // 페이지에서 시작하는 번호?
 		Map<String, Integer> pagingParam = new HashMap<String, Integer>();
 		pagingParam.put("start", pagingStart);
 		pagingParam.put("limit", PAGE_LIMIT);
 		List<ProductDTO> productList = pr.pagingList1(pagingParam);
+		System.out.println("productService.productList : " + productList);
 		return productList;
 	}
 
@@ -130,6 +131,21 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductDTO> applymember(long p_number) {
 		List<ProductDTO> applyList = pr.applymember(p_number);
 		return applyList;
+	}
+
+
+
+
+	@Override
+	public List<ProductDTO> selectList(String select) {
+		List<ProductDTO> selectList = pr.selectList(select);
+		System.out.println("productServiceImple.selectList : " + selectList);
+		
+		
+		
+		
+		return selectList;
+		
 	}
 
 

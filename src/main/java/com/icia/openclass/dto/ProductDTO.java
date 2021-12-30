@@ -8,6 +8,7 @@ import lombok.Data;
 public class ProductDTO {
 	private long p_number; // 클래스 번호
 	private long m_number; // 회원번호
+	private long o_number;
 	private String m_id; // 작성자
 	private String p_name; // 클래스이름
 	private String p_contents; // 클래스 내용

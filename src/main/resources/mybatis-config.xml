@@ -6,5 +6,7 @@
 		<typeAlias alias="memberDTO" type="com.icia.openclass.dto.MemberDTO"/>
 		<typeAlias alias="productDTO" type="com.icia.openclass.dto.ProductDTO"/>
 		<typeAlias alias="orderDTO" type="com.icia.openclass.dto.OrderDTO"/>
+		<typeAlias alias="applyDTO" type="com.icia.openclass.dto.ApplyDTO"/>
+		<typeAlias alias="replyDTO" type="com.icia.openclass.dto.ReplyDTO"/>
 	</typeAliases>
 </configuration>

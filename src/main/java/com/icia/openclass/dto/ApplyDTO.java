@@ -10,5 +10,6 @@ public class ApplyDTO {
 	private long p_number; // 게시글번호
 	private long m_number; // 회원번호
 	private String m_id; // 회원아이디
+	private long a_applyNum; // 수강신청 회원인원수
 	private Date a_date; // 수강신청한 날짜
 }

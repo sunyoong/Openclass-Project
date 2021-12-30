@@ -16,6 +16,7 @@
 	</properties>
 
 	<dependencies>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -153,15 +154,30 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- 아임포트 검증을 위한 maven dependency -->
+<dependency>
+  <groupId>com.github.iamport</groupId>
+  <artifactId>iamport-rest-client-java</artifactId>
+  <version>0.2.14</version>
+</dependency>
+		
 	</dependencies>
 	
 	<repositories>
+	
+<!-- 아임포트 검증을 위한 maven jitpack -->
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+
 		<repository>
 			<id>Oracle</id>
 			<name>Oracle JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
 	</repositories>
+	
 	
 	<build>
 		<plugins>

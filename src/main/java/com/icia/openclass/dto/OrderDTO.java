@@ -15,4 +15,7 @@ public class OrderDTO {
 	private String o_payment;
 	private Date datetime;
 	
+	// 은행, 현금영수증 유무 
+	private String o_bank;
+	private boolean o_cashrept;
 }

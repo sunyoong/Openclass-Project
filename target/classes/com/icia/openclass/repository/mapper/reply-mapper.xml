@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="reply">
+ <insert id="save" parameterType="replyDTO">
+ insert into reply_table(p_number, m_number, m_id, r_contents, r_date)
+ values (#{p_number}, #{m_number}, #{m_id}, #{r_contents}, now())
+ </insert>
+ 
+ <select id="findAll" parameterType="long" resultType="replyDTO">
+ select * from reply_table where p_number=#{p_number}
+ </select>
+ 
+ </mapper>
+ 
