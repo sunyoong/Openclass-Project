@@ -46,6 +46,8 @@ public class MemberController {
 		System.out.println("member.controller/idCheck :" + m_id + "result : " + result);
 		return result;
 	}
+	
+	
 
 	// 회원가입처리
 	@RequestMapping(value = "save", method = RequestMethod.POST)
@@ -59,6 +61,7 @@ public class MemberController {
 	// 로그인 화면요청
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginform() {
+		
 		return "member/login";
 	}
 
@@ -123,6 +126,19 @@ public class MemberController {
 			return result;
 		}
 
+		
+		//admin페이지 
+		@RequestMapping(value="admin", method=RequestMethod.GET)
+		public String admin() {
+			return "/admin/index";
+		}
+		
+		
+		// admin 비밀번호 주기변경 페이지
+		@RequestMapping(value="pwdateform", method=RequestMethod.GET)
+		public String pwdateChange() {
+			return "admin/pwdate";
+		}
 		
 		
 		

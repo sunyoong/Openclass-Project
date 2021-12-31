@@ -9,11 +9,10 @@
 <body>
 <h2>member/login.jsp</h2>
 <form action="/member/login" method="post">
-아이디 : <input type="text" name="m_id">
-비밀번호 : <input type="password" name="m_password"> 
-<input type="submit" value="확인">
+아이디 : <input type="text" name="m_id" id="m_id" >
+비밀번호 : <input type="password" name="m_password" id="m_password"> 
+<input type="submit" value="확인"> 
 </form>
-
 
 
 </body>

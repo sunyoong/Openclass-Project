@@ -138,9 +138,46 @@ paging : ${paging}
 	</c:forEach>
 </table>
 
-<!-- 페이징처리 -->
+<!-- 페이징처리(검색한 목록결과가 null이 아닐경우)-->
 
 <div>
+<c:if test="${a != null}">
+<c:choose>
+<c:when test="${searchpaging.page<=1}">
+	[이전]&nbsp;
+</c:when>
+<c:otherwise>
+	<a href="/product/search?page=${searchpaging.page-1}&searchType=${searchType}&keyword=${keyword}">[이전]</a>&nbsp;
+</c:otherwise>
+</c:choose>
+
+<c:forEach begin="${searchpaging.startPage}" end="${searchpaging.endPage}" var="i" step="1">
+<c:choose>
+<c:when test="${i eq searchpaging.page}">
+	${i}
+</c:when>
+<c:otherwise>
+	<a href="/product/search?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+</c:otherwise>
+</c:choose>
+</c:forEach>
+
+
+<c:choose>
+<c:when test="${searchpaging.page>=searchpaging.maxPage}">
+	[다음]&nbsp;
+</c:when>
+<c:otherwise>
+	<a href="/product/search?page=${searchpaging.page+1}&searchType=${searchType}&keyword=${keyword}">[다음]</a>&nbsp;
+</c:otherwise>
+</c:choose>
+</c:if>
+
+
+
+
+
+<c:if test="${a == null}">
 <c:choose>
 <c:when test="${paging.page<=1}">
 	[이전]&nbsp;
@@ -170,6 +207,7 @@ paging : ${paging}
 	<a href="/product/paging?page=${paging.page+1}">[다음]</a>&nbsp;
 </c:otherwise>
 </c:choose>
+</c:if>
 </div>
 
 </body>

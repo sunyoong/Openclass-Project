@@ -1,5 +1,6 @@
 package com.icia.openclass.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.icia.openclass.dto.MemberDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.dto.ProductDTO;
+import com.icia.openclass.dto.SearchDTO;
 
 @Repository
 public class ProductRepository {
@@ -93,8 +95,15 @@ public class ProductRepository {
 	}
 
 
-	public List<ProductDTO> search(Map<String, String> searchList) {
-		return sql.selectList("product.search", searchList);
+	public List<ProductDTO> search(SearchDTO sdto) {
+		return sql.selectList("product.search", sdto);
+	}
+
+	public int searchCount(String keyword, String searchType) {
+		Map<String, String> searchParam = new HashMap<String, String>();
+		searchParam.put("keyword", keyword);
+		searchParam.put("searchType", searchType);
+		return sql.selectOne("product.searchCount", searchParam);
 	}
 
 	

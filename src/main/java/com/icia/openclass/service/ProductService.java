@@ -44,7 +44,10 @@ public interface ProductService {
 
 	List<ProductDTO> selectList(String select);
 
-	List<ProductDTO> search(String searchType, String keyword);
+	// 검색한 목록 페이징처리
+	List<ProductDTO> search(String searchType, String keyword, int page);
+
+	PageDTO searchPaging(int page, String keyword, String searchType);
 
 	
 

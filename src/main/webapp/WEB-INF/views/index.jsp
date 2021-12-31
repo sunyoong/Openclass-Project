@@ -10,7 +10,7 @@
 <body>
 <h2> index.jsp</h2>
 
-<c:if test="${sessionScope.loginId eq 'admin'}">
+<c:if test="${sessionScope.loginId eq 'admin111'}">
 <a href="/member/admin">관리자 페이지</a>
 <a href="/member/paging">회원목록</a>
 </c:if>

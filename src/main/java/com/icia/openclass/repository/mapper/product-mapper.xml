@@ -81,8 +81,12 @@ select * from product_table order by ${select} desc, p_name asc
 </select>
 
 <!-- 검색  -->
-<select id="search" parameterType="java.util.HashMap" resultType="productDTO">
-select * from product_table where ${type} like concat ('%', #{word}, '%')
+<select id="search" parameterType="com.icia.openclass.dto.SearchDTO" resultType="productDTO">
+select * from product_table where ${searchType} like concat ('%', #{keyword}, '%') order by p_number desc limit #{pagingStart}, #{PAGE_LIMIT}
 </select>
 
+<!--검색 페이징처리 -->
+<select id="searchCount" parameterType="java.util.HashMap" resultType="int">
+select count(p_number) from product_table where ${searchType} like concat ('%', #{keyword}, '%')
+</select>
  </mapper> 

@@ -227,8 +227,7 @@ public class ProductController {
 	
 	// 조회수 리스트별로 조회(ajax) + 페이징처리(추후에..)
 	@RequestMapping(value="selectList", method=RequestMethod.GET)
-	public @ResponseBody List<ProductDTO> SelectList
-	(@RequestParam("select") String select, @RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
+	public @ResponseBody List<ProductDTO> SelectList(@RequestParam("select") String select, @RequestParam(value="page", required=false, defaultValue="1")int page, Model model) {
 		System.out.println("productController.selectList");
 		List<ProductDTO> pList = ps.selectList(select);
 		return pList;
@@ -236,22 +235,21 @@ public class ProductController {
 	
 	// 검색기능
 	@RequestMapping(value="search", method=RequestMethod.GET)
-	public String search(@RequestParam(value="page", required=false, defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, Model model) {
-		List<ProductDTO> productList = ps.search(searchType, keyword);
-		model.addAttribute("productList", productList);
-		
+	public String Search(@RequestParam(value="page", required=false, defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, Model model) {
+		List<ProductDTO> searchList = ps.search(searchType, keyword, page);
+		// 페이징처리
+		PageDTO searchpaging = ps.searchPaging(page, keyword, searchType);
+		model.addAttribute("searchpaging", searchpaging);
+		model.addAttribute("productList", searchList);
+		System.out.println("ProductController.search : " + searchpaging);
+		/* session.setAttribute("a", searchList); */
+		model.addAttribute("a", "1");
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		System.out.println("productController.search");
 		return "product/findAll";
 	}
 	
-	// 페이징처리(검색)
-	/*
-	 * @RequestMapping(value="searchPaging", method=RequestMethod.GET) public String
-	 * searchPaging(@RequestParam(value="page", required=false, defaultValue="1")int
-	 * page, Model model) { List<ProductDTO> spList = ps.spList(page); PageDTO
-	 * Paging = ps.paging(page); model.addAttribute("paging", Paging);
-	 * model.addAttribute("ProductList", spList);
-	 * System.out.println("ProductController.paging : " + spList); return
-	 * "product/findAll"; }
-	 */
+
 	
 }
