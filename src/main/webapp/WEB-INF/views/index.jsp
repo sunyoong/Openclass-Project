@@ -6,9 +6,67 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+header {
+	position: fixed;
+	width:100%;
+	height:100%;
+	background-color: brown;
+	font-size:20px;
+	display:auto:
+	flex-shrink:1;
+}
+
+</style>
+
+
+
 </head>
 <body>
-<h2> index.jsp</h2>
+<header>
+<div class="container-fluid d-flex align-items-center">
+<!-- 클래스 아이콘, 메뉴선택  -->
+<div class="grid">
+<div class="grid d-flex" style="bs-column : 12;">
+<div class="g-col-6 pr-3">CLASSMATE</div>
+<div class="g-col-4">클래스</div>
+</div>
+
+</div>
+<div class="d-flex"> 
+<input type="text" class="form-control" placeholder="Search" style="font-size:15px;">
+<button class="btn btn-light" style="mr-3">확인</button>
+</div>
+
+</div>
+
+
+</header>
+<section>
+
+
+
+</section>
+
+<section>
+
+
+
+</section>
+
+
+<footer>
+
+
+
+
+
+
+
+</footer>
+
+
 
 <c:if test="${sessionScope.loginId eq 'admin111'}">
 <a href="/member/admin">관리자 페이지</a>
