@@ -124,20 +124,21 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	// 비밀번호 일치여부
-	@Override
-	public String pwResult(String m_password) {
-		String result = mr.pwResult(m_password);
-		if(result != null) {
-			return "o";
-		} else {
-			return "x";
+		@Override
+		public String pwResult(String m_password) {
+			String result = mr.pwResult(m_password);
+			if(result != null) {
+				return "o";
+			} else {
+				return "x";
+			}
 		}
-	}
-
-
-	
-	
-
 
 
 }
+
+	
+	
+
+
+

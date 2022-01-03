@@ -12,5 +12,10 @@
  select * from reply_table where p_number=#{p_number}
  </select>
  
+ <delete id="delete" parameterType="long">
+ delete from reply_table where r_number =#{r_number}
+ 
+ 
+ </delete>
  </mapper>
  

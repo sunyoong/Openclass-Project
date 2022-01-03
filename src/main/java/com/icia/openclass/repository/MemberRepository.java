@@ -1,5 +1,6 @@
 package com.icia.openclass.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public class MemberRepository {
 		return sql.selectOne("member.idCheck", m_id);
 	}
 	
+	// 로그인
 	public MemberDTO login(MemberDTO member) {
 		System.out.println("member.repository/login: " + member);
 		return sql.selectOne("member.login", member);
@@ -56,15 +58,18 @@ public class MemberRepository {
 		
 	}
 	// 비밀번호 확인
-	public String pwResult(String m_password) {
-		return sql.selectOne("member.pwResult", m_password);
-	}
-	public List<MemberDTO> applymember(long p_number) {
+		public String pwResult(String m_password) {
+			return sql.selectOne("member.pwResult", m_password);
+		}
+		public List<MemberDTO> applymember(long p_number) {
+			
+			return sql.selectList("member.applymember", p_number);
+		}
 		
-		return sql.selectList("member.applymember", p_number);
-	}
 
 
+	
+	
 	
 
 }

@@ -1,5 +1,7 @@
 package com.icia.openclass.controller;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -61,7 +63,6 @@ public class MemberController {
 	// 로그인 화면요청
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginform() {
-		
 		return "member/login";
 	}
 
@@ -70,6 +71,7 @@ public class MemberController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@ModelAttribute MemberDTO member) {
 		String result = ms.login(member);
+		System.out.println("Controller.login");
 		return result;
 	}
 
@@ -134,12 +136,7 @@ public class MemberController {
 		}
 		
 		
-		// admin 비밀번호 주기변경 페이지
-		@RequestMapping(value="pwdateform", method=RequestMethod.GET)
-		public String pwdateChange() {
-			return "admin/pwdate";
-		}
-		
+
 		
 		
 }

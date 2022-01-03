@@ -94,7 +94,7 @@ public class ProductRepository {
 		return sql.selectList("product.select", select);
 	}
 
-
+	// 검색 (페이징처리까지)
 	public List<ProductDTO> search(SearchDTO sdto) {
 		return sql.selectList("product.search", sdto);
 	}

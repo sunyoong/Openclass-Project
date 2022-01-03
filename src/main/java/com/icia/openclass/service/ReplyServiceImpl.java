@@ -23,5 +23,10 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<ReplyDTO> findAll(long p_number) {
 		return rr.findAll(p_number);
 	}
+	@Override
+	public void delete(long r_number) {
+		rr.delete(r_number);
+		
+	}
 
 }

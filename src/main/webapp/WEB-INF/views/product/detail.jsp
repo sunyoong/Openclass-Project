@@ -42,7 +42,7 @@
 	
 	
 	
-	/* 별점 */
+	/* 별점(만족도) */
 	function stars(){
 	console.log("stars");
 	const ratingResult = document.getElementById("rating").value;
@@ -160,15 +160,16 @@ ${applyList}
 
 
 <!-- 댓글등록 -->
-
-
-<div id="replyId">
+<form action="/reply/save?p_number=${product.p_number}&m_number=${sessionScope.memberNum}" method="post">
 작성자 : ${sessionScope.loginId}
+<input type="hidden" name="m_number" value="${sessionScope.memberNum}">
 <input type="hidden" name="m_id" value="${sessionScope.loginId}" readonly>
 <input type="text" name="r_contents" id="r_contents">
-<button onclick="write1()">작성</button>
-</div>
-<div id="replyList">
+<input type="submit" value="확인">
+
+</form>
+
+<!-- <div id="replyList"> -->
 <table class="table">
 <tr> 
 	<th>클래스번호</th>
@@ -176,6 +177,9 @@ ${applyList}
 	<th>작성자</th>
 	<th>내용</th>
 	<th>작성시간</th>
+	<th>수정</th>
+	<th>삭제</th>
+	
 </tr>
 
 <c:forEach items="${replyList}" var="reply">
@@ -185,17 +189,18 @@ ${applyList}
 <td>${reply.m_id}</td>
 <td>${reply.r_contents}</td>
 <td>${reply.r_date}</td>
+<c:if test="${sessionScope.memberNum == reply.m_number}">
+<td><a href="/reply/update">수정</a></td>
+<td><a href="/reply/delete?p_number=${reply.p_number}&r_number=${reply.r_number}">삭제</a></td>
+</c:if>
 </tr>
 </c:forEach>
 </table>
-</div>
-
-
-
+<!-- </div> -->
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
+<!-- <script>
 	function write1(){
 		const R_contents = document.getElementById("r_contents").value;
 		console.log(R_contents);
@@ -228,9 +233,12 @@ ${applyList}
 				output += "<td>" + result[i].m_id+"</td>";
 				output += "<td>" + result[i].r_contents+"</td>";
 				output += "<td>" + result[i].r_date+"</td>";
+				output += "<td>" + "<a href='/reply/delete?p_number=${reply.p_number}&r_number=${reply.r_number}'>수정</a>"+"</td>";
+				output += "<td>" + "<a href='/reply/update'>삭제</a>"+"</td>";
 				output += "</tr>";
-			}),
-			output +="</table>";
+			
+				}),
+				output +="</table>";
 			replyList.innerHTML = output;
 			},
 			error: function(){
@@ -251,7 +259,7 @@ ${applyList}
 	}
 	
 
-</script>
+</script> --> 
 
 
 

@@ -172,13 +172,13 @@ public class ProductServiceImpl implements ProductService{
 		String l = String.valueOf(PAGE_LIMIT);
 		
 		// 검색목록을 가져오기 위한 Map
-		Map<String, String> searchMap = new HashMap<String, String>();
-		searchMap.put("word", keyword);
-		searchMap.put("type", searchType);
-		searchMap.put("start", s);
-		searchMap.put("limit", l);
-		System.out.println(searchMap);
-		
+//		Map<String, String> searchMap = new HashMap<String, String>();
+//		searchMap.put("word", keyword);
+//		searchMap.put("type", searchType);
+//		searchMap.put("start", s);
+//		searchMap.put("limit", l);
+//		System.out.println(searchMap);
+//		
 		SearchDTO sdto = new SearchDTO();
 		sdto.setSearchType(searchType);
 		sdto.setKeyword(keyword);

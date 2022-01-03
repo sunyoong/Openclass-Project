@@ -128,6 +128,7 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.2</version>
 		</dependency>
+
 		<!-- jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -170,7 +171,7 @@
 	    <id>jitpack.io</id>
 	    <url>https://jitpack.io</url>
 	</repository>
-
+<!-- 여기까지 아임포트 검증 -->
 		<repository>
 			<id>Oracle</id>
 			<name>Oracle JDBC Repository</name>

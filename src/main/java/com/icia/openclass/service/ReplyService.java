@@ -10,6 +10,8 @@ public interface ReplyService {
 
 	List<ReplyDTO> findAll(long p_number);
 
+	void delete(long r_number);
+
 
 
 }

@@ -23,4 +23,9 @@ public class ReplyRepository {
 		return sql.selectList("reply.findAll", p_number);
 	}
 
+	public void delete(long r_number) {
+		
+		sql.delete("reply.delete", r_number);
+	}
+
 }

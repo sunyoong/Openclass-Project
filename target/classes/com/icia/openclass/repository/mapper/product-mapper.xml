@@ -80,7 +80,7 @@ select * from product_table where p_number = #{p_number}
 select * from product_table order by ${select} desc, p_name asc
 </select>
 
-<!-- 검색  -->
+<!-- 검색 결과 목록  -->
 <select id="search" parameterType="com.icia.openclass.dto.SearchDTO" resultType="productDTO">
 select * from product_table where ${searchType} like concat ('%', #{keyword}, '%') order by p_number desc limit #{pagingStart}, #{PAGE_LIMIT}
 </select>

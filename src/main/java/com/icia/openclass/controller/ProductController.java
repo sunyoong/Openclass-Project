@@ -235,13 +235,16 @@ public class ProductController {
 	
 	// 검색기능
 	@RequestMapping(value="search", method=RequestMethod.GET)
-	public String Search(@RequestParam(value="page", required=false, defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, Model model) {
-		List<ProductDTO> searchList = ps.search(searchType, keyword, page);
+	public String Search(@RequestParam(value="page", required=false, defaultValue="1")int page,
+			@RequestParam("searchType") String searchType, @RequestParam("keyword") String keyword, Model model) {
 		// 페이징처리
 		PageDTO searchpaging = ps.searchPaging(page, keyword, searchType);
+		List<ProductDTO> searchList = ps.search(searchType, keyword, page);
+		
 		model.addAttribute("searchpaging", searchpaging);
 		model.addAttribute("productList", searchList);
 		System.out.println("ProductController.search : " + searchpaging);
+		
 		/* session.setAttribute("a", searchList); */
 		model.addAttribute("a", "1");
 		model.addAttribute("searchType", searchType);
