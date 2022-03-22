@@ -20,53 +20,34 @@ header {
 
 </style>
 
-
-
 </head>
-<body>
+ <body>
+ <!--  메뉴영역 
 <header>
 <div class="container-fluid d-flex align-items-center">
-<!-- 클래스 아이콘, 메뉴선택  -->
+클래스 아이콘, 메뉴선택 
+<ul class="nav flex-grow-1">
+
+
+
+
+
+</ul>
 <div class="grid">
 <div class="grid d-flex" style="bs-column : 12;">
 <div class="g-col-6 pr-3">CLASSMATE</div>
-<div class="g-col-4">클래스</div>
 </div>
 
-</div>
 <div class="d-flex"> 
 <input type="text" class="form-control" placeholder="Search" style="font-size:15px;">
 <button class="btn btn-light" style="mr-3">확인</button>
 </div>
-
+</div>
 </div>
 
-
 </header>
-<section>
 
-
-
-</section>
-
-<section>
-
-
-
-</section>
-
-
-<footer>
-
-
-
-
-
-
-
-</footer>
-
-
+<section> -->
 
 <c:if test="${sessionScope.loginId eq 'admin111'}">
 <a href="/member/admin">관리자 페이지</a>
@@ -83,6 +64,7 @@ header {
 <c:if test="${sessionScope.loginId == null}">
 <a href="/member/save">회원가입</a>
 <a href="/member/login">로그인</a>
+<a href="/mentor/save">멘토가입</a>
 </c:if>
 member : ${member}
 loginUser : ${sessionScope.loginUser}

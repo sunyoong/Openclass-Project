@@ -8,5 +8,6 @@
 		<typeAlias alias="orderDTO" type="com.icia.openclass.dto.OrderDTO"/>
 		<typeAlias alias="applyDTO" type="com.icia.openclass.dto.ApplyDTO"/>
 		<typeAlias alias="replyDTO" type="com.icia.openclass.dto.ReplyDTO"/>
+		<typeAlias alias="mentorSaveDTO" type="com.icia.openclass.dto.MentorSaveDTO"/>
 	</typeAliases>
 </configuration>

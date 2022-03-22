@@ -66,8 +66,8 @@
 <h2>product/findAll.jsp</h2> 
 <a href="/">첫화면</a>
 로그인 : ${sessionScope.memberNum}<br>
-${productList}<br><br>
-paging : ${paging}
+<%-- ${productList}<br><br>
+paging : ${paging} --%>
 <!-- <form action="selectList1" method="post" name="select1"> -->
 <select name="select" id="sort" onchange="select1()">
 <option value="" selected></option>
