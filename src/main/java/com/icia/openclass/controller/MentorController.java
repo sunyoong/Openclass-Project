@@ -25,7 +25,7 @@ public class MentorController {
 	@PostMapping("save/")
 	public String mentorSave(@ModelAttribute MentorSaveDTO mentorSaveDTO) {
 		ms.save(mentorSaveDTO);
-		return "";
+		return "index";
 	}
 	
 }

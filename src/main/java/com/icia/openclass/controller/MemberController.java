@@ -15,15 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.protobuf.Message;
 import com.icia.openclass.dto.MemberDTO;
+import com.icia.openclass.dto.MentorSaveDTO;
 import com.icia.openclass.dto.PageDTO;
 import com.icia.openclass.service.MemberService;
+import com.icia.openclass.service.MentorService;
 
 @Controller
 @RequestMapping(value = "/member/*")
 public class MemberController {
 	@Autowired
 	private MemberService ms;
+	
+	@Autowired
+	private MentorService mes; // 멘토
 	
 	//페이징처리
 	@RequestMapping(value="paging", method=RequestMethod.GET)
@@ -70,9 +76,16 @@ public class MemberController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@ModelAttribute MemberDTO member) {
-		String result = ms.login(member);
-		System.out.println("Controller.login");
-		return result;
+		// 멘토인지 일반회원인지 구분 필요함
+		MentorSaveDTO mentor = mes.findById(member.getM_id());
+		if(mentor!=null) {
+			return "mentor/index";
+		}else {
+			String result = ms.login(member);
+			System.out.println("Controller.login");
+			return result;
+		}
+		
 	}
 
 	

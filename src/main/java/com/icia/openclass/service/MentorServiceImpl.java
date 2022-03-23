@@ -16,6 +16,11 @@ public class MentorServiceImpl implements MentorService {
 		mr.save(mentorSaveDTO);
 		
 	}
+
+	@Override
+	public MentorSaveDTO findById(String m_id) {
+		return mr.findById(m_id);
+	}
 	
 
 	

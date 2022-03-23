@@ -8,5 +8,8 @@
  values(#{me_id}, #{me_password}, #{me_name}, #{me_phone}, now())
  </insert>
  
+ <select id="findById" parameterType="String" resultType="mentorSaveDto">
+ select * from mentor_table where me_id=#{m_id}
+ </select>
  
  </mapper>

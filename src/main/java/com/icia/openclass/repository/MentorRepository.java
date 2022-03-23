@@ -18,5 +18,13 @@ public class MentorRepository {
 		
 	}
 
+	public MentorSaveDTO findById(String m_id) {
+		MentorSaveDTO mentorSaveDTO =sql.selectOne("mentor.findById", m_id);
+		if(mentorSaveDTO!=null) ;
+		return mentorSaveDTO;
+		
+	}
+	
+
 	
 }
